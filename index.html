@@ -1,0 +1,2669 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cerca de Ti | Directorio Local</title>
+
+<style>
+
+/* =========================================================
+   COLORES PRINCIPALES
+========================================================= */
+
+:root {
+
+    --azul: #123b68;
+    --azul-oscuro: #0b2948;
+
+    --verde: #249b68;
+    --verde-oscuro: #17734d;
+
+    --celeste: #3298c8;
+
+    --amarillo: #f5bd42;
+
+    --fondo: #f5f8fa;
+
+    --blanco: #ffffff;
+
+    --texto: #1e293b;
+
+    --gris: #64748b;
+
+    --borde: #e2e8f0;
+
+    --sombra:
+        0 10px 30px rgba(15, 23, 42, 0.09);
+
+}
+
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+========================================================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    color: var(--texto);
+
+    background:
+
+        linear-gradient(
+            rgba(248, 251, 252, 0.90),
+            rgba(248, 251, 252, 0.94)
+        ),
+
+        url("fondo.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-attachment: fixed;
+
+}
+
+
+/* =========================================================
+   CABECERA
+========================================================= */
+
+header {
+
+    text-align: center;
+
+    padding:
+        35px 20px 30px;
+
+    background:
+        rgba(255,255,255,0.78);
+
+    backdrop-filter:
+        blur(12px);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.8);
+
+}
+
+
+.logo {
+
+    width: 430px;
+
+    max-width: 90%;
+
+    display: block;
+
+    margin:
+        0 auto 12px;
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+.logo:hover {
+
+    transform:
+        scale(1.025);
+
+}
+
+
+.tagline {
+
+    color:
+        var(--azul);
+
+    font-size:
+        1.05rem;
+
+    font-weight:
+        700;
+
+}
+
+
+.subtitle {
+
+    max-width:
+        650px;
+
+    margin:
+        8px auto 0;
+
+    color:
+        var(--gris);
+
+    font-size:
+        0.95rem;
+
+}
+
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
+.container {
+
+    width:
+        min(1200px, 92%);
+
+    margin:
+        0 auto;
+
+}
+
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
+.search-section {
+
+    margin-top:
+        28px;
+
+}
+
+
+.search-box {
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border:
+        1px solid var(--borde);
+
+    border-radius:
+        20px;
+
+    padding:
+        20px;
+
+    box-shadow:
+        var(--sombra);
+
+}
+
+
+.search-title {
+
+    font-size:
+        1.15rem;
+
+    font-weight:
+        700;
+
+    color:
+        var(--azul);
+
+    margin-bottom:
+        14px;
+
+}
+
+
+.search-controls {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 250px;
+
+    gap:
+        12px;
+
+}
+
+
+.input-wrapper {
+
+    position:
+        relative;
+
+}
+
+
+.search-icon {
+
+    position:
+        absolute;
+
+    left:
+        16px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size:
+        1.1rem;
+
+}
+
+
+input,
+select {
+
+    width:
+        100%;
+
+    height:
+        50px;
+
+    border:
+        1px solid var(--borde);
+
+    border-radius:
+        12px;
+
+    background:
+        white;
+
+    padding:
+        0 16px;
+
+    font-size:
+        0.95rem;
+
+    outline:
+        none;
+
+    transition:
+        0.2s;
+
+}
+
+
+input {
+
+    padding-left:
+        45px;
+
+}
+
+
+input:focus,
+select:focus {
+
+    border-color:
+        var(--celeste);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(50,152,200,0.12);
+
+}
+
+
+/* =========================================================
+   BOTONES DE CATEGORÍA
+========================================================= */
+
+.categories {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        8px;
+
+    margin-top:
+        15px;
+
+}
+
+
+.category-button {
+
+    border:
+        1px solid var(--borde);
+
+    background:
+        white;
+
+    color:
+        var(--gris);
+
+    padding:
+        8px 14px;
+
+    border-radius:
+        999px;
+
+    cursor:
+        pointer;
+
+    font-size:
+        0.87rem;
+
+    font-weight:
+        600;
+
+    transition:
+        0.2s;
+
+}
+
+
+.category-button:hover {
+
+    border-color:
+        var(--verde);
+
+    color:
+        var(--verde);
+
+}
+
+
+.category-button.active {
+
+    background:
+        var(--verde);
+
+    color:
+        white;
+
+    border-color:
+        var(--verde);
+
+}
+
+
+/* =========================================================
+   TÍTULO DE RESULTADOS
+========================================================= */
+
+.results-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin:
+        28px 0 15px;
+
+}
+
+
+.results-header h2 {
+
+    color:
+        var(--azul);
+
+    font-size:
+        1.35rem;
+
+}
+
+
+#resultCount {
+
+    color:
+        var(--gris);
+
+    font-size:
+        0.9rem;
+
+    font-weight:
+        600;
+
+}
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+.grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        22px;
+
+    padding-bottom:
+        45px;
+
+}
+
+
+.card {
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    background:
+        rgba(255,255,255,0.98);
+
+    border:
+        1px solid var(--borde);
+
+    border-radius:
+        18px;
+
+    box-shadow:
+        var(--sombra);
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    animation:
+        aparecer 0.45s ease both;
+
+}
+
+
+.card:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(15,23,42,0.14);
+
+}
+
+
+@keyframes aparecer {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(15px);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   NEGOCIO DESTACADO
+========================================================= */
+
+.featured {
+
+    border:
+        2px solid
+        rgba(36,155,104,0.35);
+
+}
+
+
+.featured-label {
+
+    position:
+        absolute;
+
+    top:
+        14px;
+
+    left:
+        14px;
+
+    z-index:
+        2;
+
+    background:
+        var(--verde);
+
+    color:
+        white;
+
+    padding:
+        6px 11px;
+
+    border-radius:
+        999px;
+
+    font-size:
+        0.75rem;
+
+    font-weight:
+        700;
+
+}
+
+
+/* =========================================================
+   IMAGEN
+========================================================= */
+
+.img-container {
+
+    width:
+        100%;
+
+    height:
+        210px;
+
+    overflow:
+        hidden;
+
+    background:
+        #e2e8f0;
+
+}
+
+
+.card-img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+    transition:
+        transform 0.45s ease;
+
+}
+
+
+.card:hover .card-img {
+
+    transform:
+        scale(1.05);
+
+}
+
+
+/* =========================================================
+   CONTENIDO TARJETA
+========================================================= */
+
+.card-content {
+
+    padding:
+        18px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    flex-grow:
+        1;
+
+}
+
+
+.badge {
+
+    width:
+        fit-content;
+
+    padding:
+        5px 10px;
+
+    border-radius:
+        7px;
+
+    background:
+        #e8f4ff;
+
+    color:
+        #1875a7;
+
+    font-size:
+        0.78rem;
+
+    font-weight:
+        700;
+
+    margin-bottom:
+        9px;
+
+}
+
+
+.card h3 {
+
+    color:
+        var(--azul);
+
+    font-size:
+        1.22rem;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.info {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        8px;
+
+    color:
+        var(--gris);
+
+    font-size:
+        0.91rem;
+
+    line-height:
+        1.5;
+
+    margin-bottom:
+        8px;
+
+}
+
+
+/* =========================================================
+   BOTONES DE TARJETA
+========================================================= */
+
+.card-buttons {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        8px;
+
+    margin-top:
+        auto;
+
+    padding-top:
+        10px;
+
+}
+
+
+.btn {
+
+    border:
+        none;
+
+    border-radius:
+        10px;
+
+    padding:
+        11px 8px;
+
+    cursor:
+        pointer;
+
+    font-size:
+        0.84rem;
+
+    font-weight:
+        700;
+
+    text-decoration:
+        none;
+
+    text-align:
+        center;
+
+    transition:
+        0.2s;
+
+}
+
+
+.btn-profile {
+
+    background:
+        #eaf3f8;
+
+    color:
+        var(--azul);
+
+}
+
+
+.btn-profile:hover {
+
+    background:
+        #dcecf5;
+
+}
+
+
+.btn-ws {
+
+    background:
+        var(--verde);
+
+    color:
+        white;
+
+}
+
+
+.btn-ws:hover {
+
+    background:
+        var(--verde-oscuro);
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================================
+   SIN RESULTADOS
+========================================================= */
+
+.no-results {
+
+    display:
+        none;
+
+    text-align:
+        center;
+
+    padding:
+        60px 20px;
+
+    background:
+        rgba(255,255,255,0.95);
+
+    border-radius:
+        18px;
+
+    margin-bottom:
+        40px;
+
+}
+
+
+.no-results-icon {
+
+    font-size:
+        3rem;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.no-results h3 {
+
+    color:
+        var(--azul);
+
+    margin-bottom:
+        6px;
+
+}
+
+
+.no-results p {
+
+    color:
+        var(--gris);
+
+}
+
+
+/* =========================================================
+   MODAL / PERFIL DEL NEGOCIO
+========================================================= */
+
+.modal {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    z-index:
+        1000;
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    padding:
+        20px;
+
+    background:
+        rgba(7,20,35,0.68);
+
+    backdrop-filter:
+        blur(6px);
+
+}
+
+
+.modal.show {
+
+    display:
+        flex;
+
+    animation:
+        fondoModal 0.25s ease;
+
+}
+
+
+@keyframes fondoModal {
+
+    from {
+
+        opacity:
+            0;
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+    }
+
+}
+
+
+.modal-content {
+
+    width:
+        min(900px, 100%);
+
+    max-height:
+        92vh;
+
+    overflow:
+        auto;
+
+    background:
+        white;
+
+    border-radius:
+        22px;
+
+    box-shadow:
+        0 25px 80px
+        rgba(0,0,0,0.25);
+
+    position:
+        relative;
+
+    animation:
+        abrirModal 0.3s ease;
+
+}
+
+
+@keyframes abrirModal {
+
+    from {
+
+        opacity:
+            0;
+
+        transform:
+            translateY(25px)
+            scale(0.97);
+
+    }
+
+    to {
+
+        opacity:
+            1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR
+========================================================= */
+
+.close-modal {
+
+    position:
+        absolute;
+
+    top:
+        14px;
+
+    right:
+        14px;
+
+    z-index:
+        5;
+
+    width:
+        40px;
+
+    height:
+        40px;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.92);
+
+    color:
+        var(--azul);
+
+    font-size:
+        1.5rem;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.15);
+
+}
+
+
+.close-modal:hover {
+
+    background:
+        white;
+
+    transform:
+        scale(1.05);
+
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.profile-image {
+
+    width:
+        100%;
+
+    height:
+        360px;
+
+    object-fit:
+        cover;
+
+    display:
+        block;
+
+}
+
+
+.profile-body {
+
+    padding:
+        28px;
+
+}
+
+
+.profile-category {
+
+    display:
+        inline-block;
+
+    background:
+        #e8f4ff;
+
+    color:
+        #1875a7;
+
+    padding:
+        6px 11px;
+
+    border-radius:
+        8px;
+
+    font-size:
+        0.8rem;
+
+    font-weight:
+        700;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.profile-body h2 {
+
+    color:
+        var(--azul);
+
+    font-size:
+        2rem;
+
+    margin-bottom:
+        10px;
+
+}
+
+
+.profile-description {
+
+    color:
+        var(--gris);
+
+    line-height:
+        1.65;
+
+    margin-bottom:
+        22px;
+
+}
+
+
+.profile-info {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:
+        12px;
+
+    margin-bottom:
+        22px;
+
+}
+
+
+.profile-info-item {
+
+    background:
+        #f7fafc;
+
+    border:
+        1px solid
+        var(--borde);
+
+    border-radius:
+        12px;
+
+    padding:
+        14px;
+
+}
+
+
+.profile-info-item strong {
+
+    display:
+        block;
+
+    color:
+        var(--azul);
+
+    margin-bottom:
+        5px;
+
+    font-size:
+        0.85rem;
+
+}
+
+
+.profile-info-item span {
+
+    color:
+        var(--gris);
+
+    font-size:
+        0.9rem;
+
+    line-height:
+        1.4;
+
+}
+
+
+.profile-actions {
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+}
+
+
+.profile-actions a {
+
+    flex:
+        1;
+
+    padding:
+        13px;
+
+    border-radius:
+        10px;
+
+    text-align:
+        center;
+
+    text-decoration:
+        none;
+
+    font-weight:
+        700;
+
+}
+
+
+.profile-whatsapp {
+
+    background:
+        var(--verde);
+
+    color:
+        white;
+
+}
+
+
+.profile-whatsapp:hover {
+
+    background:
+        var(--verde-oscuro);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    background:
+        var(--azul-oscuro);
+
+    color:
+        rgba(255,255,255,0.82);
+
+    text-align:
+        center;
+
+    padding:
+        25px 20px;
+
+}
+
+
+footer strong {
+
+    color:
+        white;
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 950px) {
+
+    .grid {
+
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 650px) {
+
+    header {
+
+        padding:
+            25px 15px;
+
+    }
+
+
+    .logo {
+
+        width:
+            330px;
+
+    }
+
+
+    .search-controls {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .results-header {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        gap:
+            5px;
+
+    }
+
+
+    .img-container {
+
+        height:
+            220px;
+
+    }
+
+
+    .profile-image {
+
+        height:
+            250px;
+
+    }
+
+
+    .profile-body {
+
+        padding:
+            20px;
+
+    }
+
+
+    .profile-body h2 {
+
+        font-size:
+            1.5rem;
+
+    }
+
+
+    .profile-info {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .profile-actions {
+
+        flex-direction:
+            column;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     CABECERA
+========================================================= -->
+
+<header>
+
+    <img
+        src="logo.png"
+        alt="Logo Cerca de Ti"
+        class="logo"
+    >
+
+    <p class="tagline">
+        Encuentra lo que necesitas cerca de ti
+    </p>
+
+    <p class="subtitle">
+        Descubre negocios, emprendimientos y servicios
+        de tu comunidad de forma rápida y sencilla.
+    </p>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =========================================================
+     BUSCADOR
+========================================================= -->
+
+<section class="search-section">
+
+    <div class="search-box">
+
+        <div class="search-title">
+            ¿Qué estás buscando?
+        </div>
+
+
+        <div class="search-controls">
+
+            <div class="input-wrapper">
+
+                <span class="search-icon">
+                    🔎
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Buscar negocio, producto o servicio..."
+                    oninput="filterBusinesses()"
+                >
+
+            </div>
+
+
+            <select
+                id="categorySelect"
+                onchange="filterBusinesses()"
+            >
+
+                <option value="todas">
+                    Todas las categorías
+                </option>
+
+                <option value="Bodega">
+                    Bodegas
+                </option>
+
+                <option value="Oficios">
+                    Oficios y Carpintería
+                </option>
+
+                <option value="Confección">
+                    Costura y Ropa
+                </option>
+
+                <option value="Técnicos">
+                    Servicios Técnicos
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="categories">
+
+            <button
+                class="category-button active"
+                onclick="selectCategory('todas', this)"
+            >
+                Todos
+            </button>
+
+            <button
+                class="category-button"
+                onclick="selectCategory('Bodega', this)"
+            >
+                Bodegas
+            </button>
+
+            <button
+                class="category-button"
+                onclick="selectCategory('Oficios', this)"
+            >
+                Oficios
+            </button>
+
+            <button
+                class="category-button"
+                onclick="selectCategory('Confección', this)"
+            >
+                Costura y ropa
+            </button>
+
+            <button
+                class="category-button"
+                onclick="selectCategory('Técnicos', this)"
+            >
+                Técnicos
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     RESULTADOS
+========================================================= -->
+
+<div class="results-header">
+
+    <h2>
+        Negocios de la comunidad
+    </h2>
+
+    <span id="resultCount">
+        5 negocios encontrados
+    </span>
+
+</div>
+
+
+<section
+    class="grid"
+    id="businessGrid"
+>
+
+
+<!-- =========================================================
+     PAOLITA
+========================================================= -->
+
+<article
+    class="card featured"
+    data-category="Bodega"
+>
+
+    <span class="featured-label">
+        Destacado
+    </span>
+
+
+    <div class="img-container">
+
+        <img
+            src="b.paolita.jpeg"
+            alt="Bodega de Abarrotes Paolita"
+            class="card-img"
+        >
+
+    </div>
+
+
+    <div class="card-content">
+
+        <span class="badge">
+            Bodega
+        </span>
+
+        <h3>
+            Bodega de Abarrotes Paolita
+        </h3>
+
+
+        <div class="info">
+
+            <span>🛒</span>
+
+            <span>
+                Abarrotes y productos de uso diario.
+            </span>
+
+        </div>
+
+
+        <div class="info">
+
+            <span>🕒</span>
+
+            <span>
+                Lunes a domingo · 7:00 AM - 10:00 PM
+            </span>
+
+        </div>
+
+
+        <div class="card-buttons">
+
+            <button
+                class="btn btn-profile"
+                onclick="openProfile('paolita')"
+            >
+                👁️ Ver perfil
+            </button>
+
+            <a
+                href="#"
+                class="btn btn-ws"
+                onclick="return false;"
+            >
+                📞 Próximamente
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- =========================================================
+     BODEGA DON PEPE
+========================================================= -->
+
+<article
+    class="card"
+    data-category="Bodega"
+>
+
+    <div class="img-container">
+
+        <img
+            src="https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=800"
+            alt="Bodega Don Pepe"
+            class="card-img"
+        >
+
+    </div>
+
+
+    <div class="card-content">
+
+        <span class="badge">
+            Bodega
+        </span>
+
+        <h3>
+            Bodega Don Pepe
+        </h3>
+
+
+        <div class="info">
+            <span>📍</span>
+            <span>
+                Av. Chosica 123,
+                a espaldas del paradero 3.
+            </span>
+        </div>
+
+
+        <div class="info">
+            <span>🛒</span>
+            <span>
+                Abarrotes, bebidas, pan y
+                artículos de limpieza.
+            </span>
+        </div>
+
+
+        <div class="info">
+            <span>🕒</span>
+            <span>
+                Lun - Dom · 7:00 AM - 10:00 PM
+            </span>
+        </div>
+
+
+        <div class="card-buttons">
+
+            <button
+                class="btn btn-profile"
+                onclick="openProfile('donpepe')"
+            >
+                👁️ Ver perfil
+            </button>
+
+            <a
+                href="https://wa.me/51999999999?text=Hola,%20vi%20su%20bodega%20en%20Cerca%20de%20Ti"
+                target="_blank"
+                class="btn btn-ws"
+            >
+                💬 WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- =========================================================
+     CARPINTERÍA
+========================================================= -->
+
+<article
+    class="card"
+    data-category="Oficios"
+>
+
+    <div class="img-container">
+
+        <img
+            src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=800"
+            alt="Carpintería San José"
+            class="card-img"
+        >
+
+    </div>
+
+
+    <div class="card-content">
+
+        <span class="badge">
+            Oficios
+        </span>
+
+        <h3>
+            Carpintería San José
+        </h3>
+
+
+        <div class="info">
+            <span>📍</span>
+            <span>
+                Calle Los Olivos 456,
+                cerca del Mercado.
+            </span>
+        </div>
+
+
+        <div class="info">
+            <span>🛠️</span>
+            <span>
+                Fabricación y reparación
+                de muebles de madera.
+            </span>
+        </div>
+
+
+        <div class="info">
+            <span>🕒</span>
+            <span>
+                Lun - Sáb · 8:00 AM - 6:00 PM
+            </span>
+        </div>
+
+
+        <div class="card-buttons">
+
+            <button
+                class="btn btn-profile"
+                onclick="openProfile('carpinteria')"
+            >
+                👁️ Ver perfil
+            </button>
+
+            <a
+                href="https://wa.me/51999999999?text=Hola,%20necesito%20un%20trabajo%20de%20carpintería"
+                target="_blank"
+                class="btn btn-ws"
+            >
+                💬 WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- =========================================================
+     COSTURA
+========================================================= -->
+
+<article
+    class="card"
+    data-category="Confección"
+>
+
+    <div class="img-container">
+
+        <img
+            src="https://images.unsplash.com/photo-1520013817300-1f4c1af2454f?q=80&w=800"
+            alt="Hilos y Agujas"
+            class="card-img"
+        >
+
+    </div>
+
+
+    <div class="card-content">
+
+        <span class="badge">
+            Confección
+        </span>
+
+        <h3>
+            Atelier "Hilos & Agujas"
+        </h3>
+
+
+        <div class="info">
+            <span>📍</span>
+            <span>
+                Jr. Primavera 789,
+                Interior 2.
+            </span>
+        </div>
+
+
+        <div class="info">
+            <span>👗</span>
+            <span>
+                Ajustes de ropa,
+                cierres y bastas.
+            </span>
+        </div>
+
+
+        <div class="info">
+            <span>🕒</span>
+            <span>
+                Mar - Sáb · 9:00 AM - 8:00 PM
+            </span>
+        </div>
+
+
+        <div class="card-buttons">
+
+            <button
+                class="btn btn-profile"
+                onclick="openProfile('hilos')"
+            >
+                👁️ Ver perfil
+            </button>
+
+            <a
+                href="https://wa.me/51999999999?text=Hola,%20quisiera%20cotizar%20un%20arreglo%20de%20ropa"
+                target="_blank"
+                class="btn btn-ws"
+            >
+                💬 WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+<!-- =========================================================
+     TÉCNICO
+========================================================= -->
+
+<article
+    class="card"
+    data-category="Técnicos"
+>
+
+    <div class="img-container">
+
+        <img
+            src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800"
+            alt="Soporte Técnico Carlos"
+            class="card-img"
+        >
+
+    </div>
+
+
+    <div class="card-content">
+
+        <span class="badge">
+            Técnicos
+        </span>
+
+        <h3>
+            Soporte Técnico Carlos
+        </h3>
+
+
+        <div class="info">
+            <span>📍</span>
+            <span>
+                Servicio a domicilio
+                en todo el barrio.
+            </span>
+        </div>
+
+
+        <div class="info">
+            <span>⚡</span>
+            <span>
+                Reparación de computadoras,
+                televisores y electrodomésticos.
+            </span>
+        </div>
+
+
+        <div class="info">
+            <span>🕒</span>
+            <span>
+                Lun - Vie · 9:00 AM - 7:00 PM
+            </span>
+        </div>
+
+
+        <div class="card-buttons">
+
+            <button
+                class="btn btn-profile"
+                onclick="openProfile('carlos')"
+            >
+                👁️ Ver perfil
+            </button>
+
+            <a
+                href="https://wa.me/51999999999?text=Hola,%20busco%20servicio%20técnico"
+                target="_blank"
+                class="btn btn-ws"
+            >
+                💬 WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+</article>
+
+
+</section>
+
+
+<!-- =========================================================
+     SIN RESULTADOS
+========================================================= -->
+
+<div
+    class="no-results"
+    id="noResults"
+>
+
+    <div class="no-results-icon">
+        🔎
+    </div>
+
+    <h3>
+        No encontramos resultados
+    </h3>
+
+    <p>
+        Intenta buscar otro negocio o categoría.
+    </p>
+
+</div>
+
+
+</main>
+
+
+<!-- =========================================================
+     MODAL DE PERFIL
+========================================================= -->
+
+<div
+    class="modal"
+    id="profileModal"
+    onclick="closeModalOutside(event)"
+>
+
+    <div
+        class="modal-content"
+        id="modalContent"
+    >
+
+        <button
+            class="close-modal"
+            onclick="closeProfile()"
+        >
+            ×
+        </button>
+
+
+        <img
+            id="profileImage"
+            class="profile-image"
+            src=""
+            alt=""
+        >
+
+
+        <div class="profile-body">
+
+            <span
+                id="profileCategory"
+                class="profile-category"
+            >
+            </span>
+
+
+            <h2 id="profileName">
+            </h2>
+
+
+            <p
+                id="profileDescription"
+                class="profile-description"
+            >
+            </p>
+
+
+            <div class="profile-info">
+
+
+                <div class="profile-info-item">
+
+                    <strong>
+                        📍 Ubicación
+                    </strong>
+
+                    <span id="profileLocation">
+                    </span>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <strong>
+                        🕒 Horario
+                    </strong>
+
+                    <span id="profileHours">
+                    </span>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <strong>
+                        🛍️ Productos o servicios
+                    </strong>
+
+                    <span id="profileServices">
+                    </span>
+
+                </div>
+
+
+                <div class="profile-info-item">
+
+                    <strong>
+                        📞 Contacto
+                    </strong>
+
+                    <span id="profileContact">
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="profile-actions">
+
+                <a
+                    id="profileWhatsapp"
+                    href="#"
+                    target="_blank"
+                    class="profile-whatsapp"
+                >
+                    💬 Contactar por WhatsApp
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <p>
+        <strong>Cerca de Ti</strong>
+        · Conectando a la comunidad con
+        negocios y servicios locales.
+    </p>
+
+    <p>
+        Directorio digital de la comunidad
+    </p>
+
+</footer>
+
+
+<script>
+
+
+/* =========================================================
+   INFORMACIÓN DE LOS NEGOCIOS
+========================================================= */
+
+const businesses = {
+
+    paolita: {
+
+        name:
+            "Bodega de Abarrotes Paolita",
+
+        category:
+            "Bodega",
+
+        image:
+            "b.paolita.jpeg",
+
+        description:
+            "Bodega de abarrotes de la comunidad que ofrece productos de uso diario para los vecinos. Un establecimiento pensado para facilitar las compras del día a día cerca de casa.",
+
+        location:
+            "Bodega de Abarrotes Paolita",
+
+        hours:
+            "Lunes a domingo · 7:00 AM - 10:00 PM",
+
+        services:
+            "Abarrotes y productos de uso diario.",
+
+        contact:
+            "Contacto próximamente",
+
+        whatsapp:
+            ""
+
+    },
+
+
+    donpepe: {
+
+        name:
+            "Bodega Don Pepe",
+
+        category:
+            "Bodega",
+
+        image:
+            "https://images.unsplash.com/photo-1578916171728-46686eac8d58?q=80&w=800",
+
+        description:
+            "Bodega dedicada a la venta de productos de consumo diario, bebidas, pan y artículos de limpieza para los vecinos de la zona.",
+
+        location:
+            "Av. Chosica 123, a espaldas del paradero 3",
+
+        hours:
+            "Lunes a domingo · 7:00 AM - 10:00 PM",
+
+        services:
+            "Abarrotes, bebidas heladas, pan caliente y artículos de limpieza.",
+
+        contact:
+            "WhatsApp disponible",
+
+        whatsapp:
+            "https://wa.me/51999999999?text=Hola,%20vi%20su%20bodega%20en%20Cerca%20de%20Ti"
+
+    },
+
+
+    carpinteria: {
+
+        name:
+            "Carpintería San José",
+
+        category:
+            "Oficios",
+
+        image:
+            "https://images.unsplash.com/photo-1538688525198-9b88f6f53126?q=80&w=800",
+
+        description:
+            "Servicio especializado en fabricación y reparación de muebles de madera, adaptados a las necesidades de cada cliente.",
+
+        location:
+            "Calle Los Olivos 456, cerca del Mercado",
+
+        hours:
+            "Lunes a sábado · 8:00 AM - 6:00 PM",
+
+        services:
+            "Muebles a medida, puertas, marcos y reparaciones.",
+
+        contact:
+            "WhatsApp disponible",
+
+        whatsapp:
+            "https://wa.me/51999999999?text=Hola,%20necesito%20un%20trabajo%20de%20carpintería"
+
+    },
+
+
+    hilos: {
+
+        name:
+            'Atelier "Hilos & Agujas"',
+
+        category:
+            "Confección",
+
+        image:
+            "https://images.unsplash.com/photo-1520013817300-1f4c1af2454f?q=80&w=800",
+
+        description:
+            "Servicio de costura y confección enfocado en arreglos de prendas para ayudar a los vecinos a mantener y adaptar su ropa.",
+
+        location:
+            "Jr. Primavera 789, Interior 2",
+
+        hours:
+            "Martes a sábado · 9:00 AM - 8:00 PM",
+
+        services:
+            "Ajustes de ropa, cambio de cierres, bastas y vestidos.",
+
+        contact:
+            "WhatsApp disponible",
+
+        whatsapp:
+            "https://wa.me/51999999999?text=Hola,%20quisiera%20cotizar%20un%20arreglo%20de%20ropa"
+
+    },
+
+
+    carlos: {
+
+        name:
+            "Soporte Técnico Carlos",
+
+        category:
+            "Técnicos",
+
+        image:
+            "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800",
+
+        description:
+            "Servicio técnico a domicilio para reparación y mantenimiento de diferentes equipos y electrodomésticos.",
+
+        location:
+            "Servicio a domicilio en todo el barrio",
+
+        hours:
+            "Lunes a viernes · 9:00 AM - 7:00 PM",
+
+        services:
+            "Computadoras, televisores, lavadoras y electrodomésticos.",
+
+        contact:
+            "WhatsApp disponible",
+
+        whatsapp:
+            "https://wa.me/51999999999?text=Hola,%20busco%20servicio%20técnico"
+
+    }
+
+};
+
+
+/* =========================================================
+   ABRIR PERFIL
+========================================================= */
+
+function openProfile(id) {
+
+    const business =
+        businesses[id];
+
+
+    if (!business) {
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "profileImage"
+    ).src =
+        business.image;
+
+
+    document.getElementById(
+        "profileImage"
+    ).alt =
+        business.name;
+
+
+    document.getElementById(
+        "profileCategory"
+    ).textContent =
+        business.category;
+
+
+    document.getElementById(
+        "profileName"
+    ).textContent =
+        business.name;
+
+
+    document.getElementById(
+        "profileDescription"
+    ).textContent =
+        business.description;
+
+
+    document.getElementById(
+        "profileLocation"
+    ).textContent =
+        business.location;
+
+
+    document.getElementById(
+        "profileHours"
+    ).textContent =
+        business.hours;
+
+
+    document.getElementById(
+        "profileServices"
+    ).textContent =
+        business.services;
+
+
+    document.getElementById(
+        "profileContact"
+    ).textContent =
+        business.contact;
+
+
+    const whatsapp =
+        document.getElementById(
+            "profileWhatsapp"
+        );
+
+
+    if (business.whatsapp) {
+
+        whatsapp.href =
+            business.whatsapp;
+
+        whatsapp.style.display =
+            "block";
+
+    }
+
+    else {
+
+        whatsapp.style.display =
+            "none";
+
+    }
+
+
+    document.getElementById(
+        "profileModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
+
+/* =========================================================
+   CERRAR PERFIL
+========================================================= */
+
+function closeProfile() {
+
+    document.getElementById(
+        "profileModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    document.body.style.overflow =
+        "";
+
+}
+
+
+/* =========================================================
+   CERRAR HACIENDO CLIC FUERA
+========================================================= */
+
+function closeModalOutside(event) {
+
+    if (
+        event.target.id ===
+        "profileModal"
+    ) {
+
+        closeProfile();
+
+    }
+
+}
+
+
+/* =========================================================
+   CERRAR CON LA TECLA ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            closeProfile();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
+function filterBusinesses() {
+
+    const search =
+        document
+            .getElementById(
+                "searchInput"
+            )
+            .value
+            .toLowerCase()
+            .trim();
+
+
+    const category =
+        document
+            .getElementById(
+                "categorySelect"
+            )
+            .value;
+
+
+    const cards =
+        document.querySelectorAll(
+            ".card"
+        );
+
+
+    let visibleCount = 0;
+
+
+    cards.forEach(card => {
+
+        const text =
+            card
+                .textContent
+                .toLowerCase();
+
+
+        const cardCategory =
+            card.dataset.category;
+
+
+        const matchesSearch =
+            text.includes(search);
+
+
+        const matchesCategory =
+            category === "todas" ||
+            cardCategory === category;
+
+
+        if (
+            matchesSearch &&
+            matchesCategory
+        ) {
+
+            card.style.display =
+                "flex";
+
+            visibleCount++;
+
+        }
+
+        else {
+
+            card.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    document.getElementById(
+        "resultCount"
+    ).textContent =
+
+        visibleCount === 1
+
+        ? "1 negocio encontrado"
+
+        : visibleCount +
+          " negocios encontrados";
+
+
+    const noResults =
+        document.getElementById(
+            "noResults"
+        );
+
+
+    noResults.style.display =
+
+        visibleCount === 0
+
+        ? "block"
+
+        : "none";
+
+}
+
+
+/* =========================================================
+   CATEGORÍAS
+========================================================= */
+
+function selectCategory(
+    category,
+    button
+) {
+
+
+    document.getElementById(
+        "categorySelect"
+    ).value =
+        category;
+
+
+    document
+        .querySelectorAll(
+            ".category-button"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    filterBusinesses();
+
+}
+
+
+/* =========================================================
+   INICIAR
+========================================================= */
+
+filterBusinesses();
+
+
+</script>
+
+
+</body>
+
+</html>
