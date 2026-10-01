@@ -20,7 +20,134 @@
 <title>Cerca de Ti | Directorio Local</title>
 
 <style>
+/* =========================================================
+   INFORMACIÓN DEL PROYECTO Y EQUIPO
+========================================================= */
 
+.team-section {
+    width: min(1200px, 92%);
+    margin: 70px auto 50px;
+    text-align: center;
+}
+
+.team-section > h2 {
+    color: var(--azul);
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.project-name {
+    color: var(--verde-oscuro);
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+}
+
+.team-intro {
+    color: var(--gris);
+    max-width: 650px;
+    margin: 0 auto 35px;
+}
+
+.project-block {
+    margin-bottom: 35px;
+}
+
+.project-block > h2 {
+    color: var(--azul);
+    margin-bottom: 20px;
+}
+
+
+/* TARJETAS DE LOS INTEGRANTES */
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.team-card,
+.teacher-card {
+    background: rgba(255,255,255,0.96);
+    border: 1px solid var(--borde);
+    border-radius: 18px;
+    padding: 25px 18px;
+    box-shadow: var(--sombra);
+    transition: transform 0.3s ease;
+}
+
+.team-card:hover,
+.teacher-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.team-card h3,
+.teacher-card h3 {
+    color: var(--azul);
+    font-size: 1.05rem;
+}
+
+.team-card p,
+.teacher-card p {
+    color: var(--gris);
+    margin-top: 7px;
+}
+
+
+/* DOCENTE */
+
+.teacher-card {
+    max-width: 500px;
+    margin: auto;
+}
+
+
+/* INFORMACIÓN DEL COLEGIO */
+
+.school-info {
+    margin-top: 35px;
+    padding: 35px 25px;
+    background: rgba(255,255,255,0.96);
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+}
+
+.school-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.school-info h2 {
+    color: var(--azul);
+    margin-bottom: 8px;
+}
+
+.school-info h3 {
+    color: var(--verde-oscuro);
+    margin-bottom: 20px;
+}
+
+.school-info p {
+    color: var(--gris);
+    margin: 8px 0;
+}
+
+
+/* ADAPTACIÓN PARA CELULARES */
+
+@media (max-width: 800px) {
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
 /* =========================================================
    COLORES PRINCIPALES
 ========================================================= */
@@ -2162,7 +2289,120 @@ footer strong {
     </div>
 
 </div>
+<!-- =========================================================
+     INFORMACIÓN DEL PROYECTO Y EQUIPO
+========================================================= -->
 
+<section class="team-section">
+
+    <h2>Proyecto de Emprendimiento</h2>
+
+    <h1 class="project-name">
+        Cerca de Ti
+    </h1>
+
+    <p class="team-intro">
+        Conoce a los estudiantes que participaron en la creación
+        y desarrollo de este proyecto.
+    </p>
+
+
+    <!-- INTEGRANTES -->
+
+    <div class="project-block">
+
+        <h2>👥 Integrantes del equipo de trabajo</h2>
+
+        <div class="team-grid">
+
+            <div class="team-card">
+                <div class="team-icon">👤</div>
+                <h3>Cardenas Mayta Jhordan</h3>
+                <p>Integrante del equipo</p>
+            </div>
+
+
+            <div class="team-card">
+                <div class="team-icon">👤</div>
+                <h3>Hilario Maquin Diego Alejandro</h3>
+                <p>Integrante del equipo</p>
+            </div>
+
+
+            <div class="team-card">
+                <div class="team-icon">👤</div>
+                <h3>Roque Baca Haziel Daryl</h3>
+                <p>Integrante del equipo</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- DOCENTE -->
+
+    <div class="project-block">
+
+        <h2>👨‍🏫 Docente asesor</h2>
+
+        <div class="teacher-card">
+
+            <div class="team-icon">🎓</div>
+
+            <h3>
+                Aguilar Salvador, Nelson Abraham
+            </h3>
+
+            <p>
+                Docente asesor de Educación para el Trabajo
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- INSTITUCIÓN -->
+
+    <div class="school-info">
+
+        <div class="school-icon">🏫</div>
+
+        <h2>Institución Educativa</h2>
+
+        <h3>
+            Fe y Alegría 41 - Calasanz
+        </h3>
+
+        <p>
+            <strong>Proyecto:</strong>
+            Página web del Colegio Fe y Alegría 41 - Calasanz
+        </p>
+
+        <p>
+            <strong>Creado por:</strong>
+            Estudiantes de 3.º de secundaria
+        </p>
+
+        <p>
+            <strong>Taller:</strong>
+            Ofimática
+        </p>
+
+        <p>
+            <strong>Ubicación:</strong>
+            La Era, Ñaña
+        </p>
+
+        <p>
+            <strong>Año:</strong>
+            2026
+        </p>
+
+    </div>
+
+</section>
 
 <!-- =========================================================
      FOOTER
@@ -2177,7 +2417,20 @@ footer strong {
     </p>
 
     <p>
-        Directorio digital de la comunidad
+        Proyecto de emprendimiento · Fe y Alegría 41 - Calasanz
+    </p>
+
+    <p>
+        Creado por los estudiantes de 3.º C de secundaria
+        · Taller de Ofimática
+    </p>
+
+    <p>
+        La Era, Ñaña · 2026
+    </p>
+
+    <p>
+        Todos los derechos reservados
     </p>
 
 </footer>
